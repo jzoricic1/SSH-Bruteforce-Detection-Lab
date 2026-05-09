@@ -1,0 +1,67 @@
+2026-04-25T11:23:27.980344+00:00 ubuntu-target passwd[1150]: password for 'jakov' changed by 'root'
+2026-04-25T11:23:27.980764+00:00 ubuntu-target systemd-logind[1187]: New seat seat0.
+2026-04-25T11:23:27.980770+00:00 ubuntu-target systemd-logind[1187]: Watching system buttons on /dev/input/event0 (Power Button)
+2026-04-25T11:23:27.980934+00:00 ubuntu-target systemd-logind[1187]: Watching system buttons on /dev/input/event1 (Sleep Button)
+2026-04-25T11:23:27.980940+00:00 ubuntu-target systemd-logind[1187]: Watching system buttons on /dev/input/event2 (AT Translated Set 2 keyboard)
+2026-04-25T11:23:28.561949+00:00 ubuntu-target sshd[1418]: Server listening on 0.0.0.0 port 22.
+2026-04-25T11:23:28.569897+00:00 ubuntu-target sshd[1418]: Server listening on :: port 22.
+2026-04-25T11:26:18.058035+00:00 ubuntu-target login: pam_unix(login:session): session opened for user jakov(uid=1000) by jakov(uid=0)
+2026-04-25T11:26:18.094868+00:00 ubuntu-target systemd-logind[1187]: New session '1' of user 'jakov' with class 'user' and type 'tty'.
+2026-04-25T11:26:18.178043+00:00 ubuntu-target (systemd): pam_unix(systemd-user:session): session opened for user jakov(uid=1000) by jakov(uid=0)
+2026-04-25T11:26:18.181027+00:00 ubuntu-target systemd-logind[1187]: New session '2' of user 'jakov' with class 'manager' and type 'unspecified'.
+2026-04-25T11:27:36.551479+00:00 ubuntu-target sudo: pam_unix(sudo:session): session opened for user root(uid=0) by jakov(uid=1000)
+2026-04-25T11:27:36.551744+00:00 ubuntu-target sudo: jakov : TTY=/dev/tty1 ; PWD=/home/jakov ; USER=root ; COMMAND=/usr/bin/systemctl status ssh
+2026-04-25T11:27:36.578546+00:00 ubuntu-target sudo: pam_unix(sudo:session): session closed for user root
+2026-04-25T11:29:20.294643+00:00 ubuntu-target sudo: pam_unix(sudo:session): session opened for user root(uid=0) by jakov(uid=1000)
+2026-04-25T11:29:20.298029+00:00 ubuntu-target sudo: jakov : TTY=/dev/tty1 ; PWD=/home/jakov ; USER=root ; COMMAND=/usr/sbin/poweroff 
+2026-04-25T11:29:20.307632+00:00 ubuntu-target systemd-logind[1187]: The system will power off now!
+2026-04-25T11:29:20.325364+00:00 ubuntu-target sudo: pam_unix(sudo:session): session closed for user root
+2026-04-25T11:29:20.363466+00:00 ubuntu-target systemd-logind[1187]: System is powering down.
+2026-04-25T11:29:20.435236+00:00 ubuntu-target login: pam_unix(login:session): session closed for user jakov
+2026-04-26T12:47:40.977750+00:00 ubuntu-target systemd-logind[1065]: Watching system buttons on /dev/input/event0 (Power Button)
+2026-04-26T12:47:40.977753+00:00 ubuntu-target systemd-logind[1065]: Watching system buttons on /dev/input/event1 (Sleep Button)
+2026-04-26T12:47:40.977756+00:00 ubuntu-target systemd-logind[1065]: Watching system buttons on /dev/input/event2 (AT Translated Set 2 keyboard)
+2026-04-26T12:47:40.977759+00:00 ubuntu-target systemd-logind[1065]: New seat seat0.
+2026-04-26T12:49:54.230917+00:00 ubuntu-target login: pam_unix(login:session): session opened for user jakov(uid=1000) by jakov(uid=0)
+2026-04-26T12:49:54.260945+00:00 ubuntu-target systemd-logind[1065]: New session '1' of user 'jakov' with class 'user' and type 'tty'.
+2026-04-26T12:49:54.361157+00:00 ubuntu-target (systemd): pam_unix(systemd-user:session): session opened for user jakov(uid=1000) by jakov(uid=0)
+2026-04-26T12:49:54.371015+00:00 ubuntu-target systemd-logind[1065]: New session '2' of user 'jakov' with class 'manager' and type 'unspecified'.
+2026-04-26T13:03:37.842240+00:00 ubuntu-target sshd[1638]: Server listening on 0.0.0.0 port 22.
+2026-04-26T13:03:37.842488+00:00 ubuntu-target sshd[1638]: Server listening on :: port 22.
+2026-04-26T13:03:37.888280+00:00 ubuntu-target sshd-session[1640]: Connection closed by 192.168.56.102 port 37842
+2026-04-26T13:15:31.938505+00:00 ubuntu-target sshd-session[1650]: Received disconnect from 192.168.56.102 port 56920:11: Bye Bye [preauth]
+2026-04-26T13:15:31.943463+00:00 ubuntu-target sshd-session[1650]: Disconnected from authenticating user jakov 192.168.56.102 port 56920 [preauth]
+2026-04-26T13:15:32.252976+00:00 ubuntu-target unix_chkpwd[1660]: password check failed for user (jakov)
+2026-04-26T13:15:32.253979+00:00 ubuntu-target sshd-session[1652]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.56.102  user=jakov
+2026-04-26T13:15:32.268092+00:00 ubuntu-target unix_chkpwd[1661]: password check failed for user (jakov)
+2026-04-26T13:15:32.269064+00:00 ubuntu-target sshd-session[1656]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.56.102  user=jakov
+2026-04-26T13:15:32.290080+00:00 ubuntu-target unix_chkpwd[1662]: password check failed for user (jakov)
+2026-04-26T13:15:32.291127+00:00 ubuntu-target sshd-session[1655]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.56.102  user=jakov
+2026-04-26T13:15:32.296207+00:00 ubuntu-target unix_chkpwd[1663]: password check failed for user (jakov)
+2026-04-26T13:15:32.296528+00:00 ubuntu-target sshd-session[1653]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.56.102  user=jakov
+2026-04-26T13:15:33.490343+00:00 ubuntu-target sshd-session[1652]: Failed password for jakov from 192.168.56.102 port 56934 ssh2
+2026-04-26T13:15:34.123253+00:00 ubuntu-target sshd-session[1656]: Failed password for jakov from 192.168.56.102 port 56978 ssh2
+2026-04-26T13:15:34.347441+00:00 ubuntu-target sshd-session[1655]: Failed password for jakov from 192.168.56.102 port 56962 ssh2
+2026-04-26T13:15:34.604918+00:00 ubuntu-target unix_chkpwd[1664]: password check failed for user (jakov)
+2026-04-26T13:15:34.620550+00:00 ubuntu-target unix_chkpwd[1665]: password check failed for user (jakov)
+2026-04-26T13:15:34.648324+00:00 ubuntu-target sshd-session[1655]: Accepted password for jakov from 192.168.56.102 port 56962 ssh2
+2026-04-26T13:15:34.653062+00:00 ubuntu-target sshd-session[1655]: pam_unix(sshd:session): session opened for user jakov(uid=1000) by jakov(uid=0)
+2026-04-26T13:15:34.660073+00:00 ubuntu-target systemd-logind[1065]: New session '3' of user 'jakov' with class 'user' and type 'tty'.
+2026-04-26T13:15:34.880380+00:00 ubuntu-target sshd-session[1653]: Failed password for jakov from 192.168.56.102 port 56950 ssh2
+2026-04-26T13:15:35.372245+00:00 ubuntu-target sshd-session[1720]: Connection closed by 192.168.56.102 port 56962
+2026-04-26T13:15:35.379837+00:00 ubuntu-target sshd-session[1655]: pam_unix(sshd:session): session closed for user jakov
+2026-04-26T13:15:35.380350+00:00 ubuntu-target systemd-logind[1065]: Session 3 logged out. Waiting for processes to exit.
+2026-04-26T13:15:35.383846+00:00 ubuntu-target systemd-logind[1065]: Removed session 3.
+2026-04-26T13:15:36.691272+00:00 ubuntu-target sshd-session[1656]: Failed password for jakov from 192.168.56.102 port 56978 ssh2
+2026-04-26T13:15:36.738423+00:00 ubuntu-target sshd-session[1652]: Failed password for jakov from 192.168.56.102 port 56934 ssh2
+2026-04-26T13:15:36.951485+00:00 ubuntu-target sshd-session[1652]: Connection closed by authenticating user jakov 192.168.56.102 port 56934 [preauth]
+2026-04-26T13:15:36.952417+00:00 ubuntu-target sshd-session[1652]: PAM 1 more authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.56.102  user=jakov
+2026-04-26T13:15:36.964981+00:00 ubuntu-target sshd-session[1656]: Connection closed by authenticating user jakov 192.168.56.102 port 56978 [preauth]
+2026-04-26T13:15:36.965804+00:00 ubuntu-target sshd-session[1656]: PAM 1 more authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.56.102  user=jakov
+2026-04-26T13:15:36.989409+00:00 ubuntu-target sshd-session[1653]: Connection closed by authenticating user jakov 192.168.56.102 port 56950 [preauth]
+2026-04-26T13:17:01.333007+00:00 ubuntu-target CRON[1724]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+2026-04-26T13:17:01.342648+00:00 ubuntu-target CRON[1724]: pam_unix(cron:session): session closed for user root
+2026-04-26T13:18:56.856551+00:00 ubuntu-target sudo: pam_unix(sudo:session): session opened for user root(uid=0) by jakov(uid=1000)
+2026-04-26T13:18:56.856908+00:00 ubuntu-target sudo: jakov : TTY=/dev/tty1 ; PWD=/home/jakov ; USER=root ; COMMAND=/usr/bin/tail -n 50 /var/log/auth.log
+2026-04-26T13:18:56.884998+00:00 ubuntu-target sudo: pam_unix(sudo:session): session closed for user root
+2026-04-26T13:23:34.664104+00:00 ubuntu-target sudo: pam_unix(sudo:session): session opened for user root(uid=0) by jakov(uid=1000)
