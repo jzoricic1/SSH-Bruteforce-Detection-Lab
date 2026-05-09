@@ -245,7 +245,6 @@ A four-panel dashboard provides a single-pane overview of the brute-force activi
 | Top Source IPs (Failed Attempts) | Bar Chart | Identifies the most active attackers |
 | Failed Logins Over Time | Column Chart | Reveals burst patterns on the timeline |
 
-The timeline panel is particularly diagnostic — six failures concentrated in three seconds is a visual signature of an automated tool, not a forgetful user.
 
 ---
 
