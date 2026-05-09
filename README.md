@@ -178,7 +178,7 @@ index=bruteforce_lab sourcetype=linux_secure "Failed password"
 
 ### 3. Threshold Detection
 
-Counting alone is not enough — six failed attempts spread over a year is normal user behavior, but six failures within seconds is an attack. A time-window threshold distinguishes the two:
+Six failed attempts spread over a year is normal user behavior, but six failures within seconds is probably an attack. A time-window threshold distinguishes the two:
 
 ```spl
 index=bruteforce_lab sourcetype=linux_secure "Failed password"
@@ -190,7 +190,7 @@ index=bruteforce_lab sourcetype=linux_secure "Failed password"
 
 ![Splunk — threshold detection](screenshots/threshold_detection.png)
 
-The query buckets events into 1-minute windows and only returns IP/user pairs with 5 or more failed attempts — the classical brute-force fingerprint.
+The query buckets events into 1-minute windows and only returns IP/user pairs with 5 or more failed attempts.
 
 ### 4. Failed → Accepted Correlation
 
@@ -211,7 +211,7 @@ index=bruteforce_lab sourcetype=linux_secure (("Failed password") OR ("Accepted 
 |---|---|---|---|
 | 192.168.56.102 | jakov | 6 | 1 |
 
-This single row constitutes a confirmed compromise event. In a SOC workflow, this would trigger an immediate response: account lockdown, password reset, audit of all activity originating from the source IP, and a check for lateral movement.
+This single row constitutes a confirmed compromise event. Based on standard SOC playbooks, this finding would warrant an immediate response: account lockdown, password reset, audit of all activity originating from the source IP, and a check for lateral movement.
 
 ---
 
@@ -228,7 +228,7 @@ The correlation query was saved as a real-time alert in Splunk:
 
 ![Splunk — alert configuration](screenshots/alert_configured.png)
 
-In a production environment, the same alert would be paired with a Splunk Universal Forwarder streaming `auth.log` from monitored hosts, and would route to email, ticketing, or SOAR playbooks instead of the in-app Triggered Alerts list.
+For lab purposes, the alert was configured with the Add to Triggered Alerts action, which logs alerts to Splunk's in-app activity feed. In production deployments, alerts are typically connected to email notifications, ticketing systems, or automated response workflows, and would receive log data continuously via a forwarder rather than from a one-time file upload
 
 ---
 
