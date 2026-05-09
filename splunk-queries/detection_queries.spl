@@ -1,0 +1,123 @@
+# ============================================================
+# SSH Brute-Force Detection — Splunk SPL Queries
+# ============================================================
+# Index: bruteforce_lab
+# Sourcetype: linux_secure
+# Host: ubuntu-target
+#
+# These queries detect SSH brute-force attacks against the
+# user 'jakov' from a Kali attacker (192.168.56.102) targeting
+# Ubuntu Server (192.168.56.101).
+# ============================================================
+
+
+# ------------------------------------------------------------
+# 1. FIRST DETECTION — Failed Login Attempts
+# ------------------------------------------------------------
+# Identifies all SSH authentication failures in the index.
+# Returns 6 events from the simulated Hydra attack.
+
+index=bruteforce_lab sourcetype=linux_secure "Failed password"
+
+
+# ------------------------------------------------------------
+# 2. STATS AGGREGATION — Failed Attempts by Source IP & User
+# ------------------------------------------------------------
+# Aggregates failed attempts by source IP and target user.
+# Provides an "executive summary" view of brute-force activity.
+
+index=bruteforce_lab sourcetype=linux_secure "Failed password"
+| rex "Failed password for (?<user>\w+) from (?<src_ip>[\d\.]+)"
+| stats count by src_ip, user
+
+
+# ------------------------------------------------------------
+# 3. THRESHOLD DETECTION — 5+ Failed Attempts in 1 Minute
+# ------------------------------------------------------------
+# Time-window-based detection. Buckets events into 1-minute
+# windows and flags any IP/user combination with 5 or more
+# failed attempts — the classical brute-force fingerprint.
+
+index=bruteforce_lab sourcetype=linux_secure "Failed password"
+| rex "Failed password for (?<user>\w+) from (?<src_ip>[\d\.]+)"
+| bin _time span=1m
+| stats count by _time, src_ip, user
+| where count >= 5
+
+
+# ------------------------------------------------------------
+# 4. FAILED → ACCEPTED CORRELATION — Successful Compromises
+# ------------------------------------------------------------
+# *** PRIMARY DETECTION QUERY ***
+# Detects successful brute-force attacks: 5+ failed attempts
+# followed by a successful login from the same source IP.
+# Indicates an account compromise — high severity incident.
+
+index=bruteforce_lab sourcetype=linux_secure (("Failed password") OR ("Accepted password"))
+| rex "(?<auth_result>Failed|Accepted) password for (?<user>\w+) from (?<src_ip>[\d\.]+)"
+| stats count(eval(auth_result="Failed")) as failed_attempts, 
+        count(eval(auth_result="Accepted")) as successful_logins 
+        by src_ip, user
+| where failed_attempts >= 5 AND successful_logins >= 1
+
+
+# ============================================================
+# DASHBOARD QUERIES
+# ============================================================
+
+
+# ------------------------------------------------------------
+# 5. DASHBOARD PANEL — Total Failed Login Attempts
+# ------------------------------------------------------------
+# Single-value KPI: total count of failed authentications.
+
+index=bruteforce_lab sourcetype=linux_secure "Failed password" 
+| stats count
+
+
+# ------------------------------------------------------------
+# 6. DASHBOARD PANEL — Successful Compromises Detected
+# ------------------------------------------------------------
+# Single-value KPI: count of confirmed brute-force compromises.
+
+index=bruteforce_lab sourcetype=linux_secure (("Failed password") OR ("Accepted password"))
+| rex "(?<auth_result>Failed|Accepted) password for (?<user>\w+) from (?<src_ip>[\d\.]+)"
+| stats count(eval(auth_result="Failed")) as failed, 
+        count(eval(auth_result="Accepted")) as accepted 
+        by src_ip, user
+| where failed >= 5 AND accepted >= 1
+| stats count
+
+
+# ------------------------------------------------------------
+# 7. DASHBOARD PANEL — Top Source IPs (Failed Attempts)
+# ------------------------------------------------------------
+# Bar chart of attacking IPs sorted by failed attempt count.
+
+index=bruteforce_lab sourcetype=linux_secure "Failed password"
+| rex "Failed password for (?<user>\w+) from (?<src_ip>[\d\.]+)"
+| stats count by src_ip
+| sort -count
+
+
+# ------------------------------------------------------------
+# 8. DASHBOARD PANEL — Failed Logins Over Time
+# ------------------------------------------------------------
+# Column chart with 1-second granularity showing the
+# brute-force burst pattern on the timeline.
+
+index=bruteforce_lab sourcetype=linux_secure "Failed password"
+| timechart span=1s count
+
+
+# ============================================================
+# REAL-TIME ALERT
+# ============================================================
+# Alert Name: SSH Brute-Force Successful Compromise
+# Alert Type: Real-time
+# Trigger Condition: Per-Result
+# Action: Add to Triggered Alerts
+# Severity: High
+#
+# Alert query is identical to query #4 above.
+# ============================================================
