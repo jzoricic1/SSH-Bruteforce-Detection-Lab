@@ -256,7 +256,6 @@ In a real environment, the following controls would have prevented or significan
 - **Strong password policy or key-based authentication.** Disabling password authentication (`PasswordAuthentication no` in `sshd_config`) eliminates the attack vector entirely.
 - **fail2ban or sshguard.** Automatic IP banning after a configurable number of failed attempts neutralizes brute-force attempts at the host level.
 - **Multi-factor authentication.** A second factor renders a guessed password insufficient on its own.
-- **Network segmentation.** SSH should not be exposed directly to untrusted networks; a bastion host or VPN should mediate access.
 
 ---
 
